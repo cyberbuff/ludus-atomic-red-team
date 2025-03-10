@@ -1,0 +1,63 @@
+ludus:
+  - vm_name: "art-debian"
+    hostname: "art-debian"
+    template: debian-12-x64-server-template
+    vlan: 20
+    ip_last_octet: 21
+    ram_gb: 4
+    cpus: 2
+    linux: true
+    testing:
+      snapshot: true
+      block_internet: false
+    roles:
+      - setup-atomic-red-team
+
+  - vm_name: "art-win11"
+    hostname: "art-win11"
+    template: win11-22h2-x64-enterprise-template
+    vlan: 20
+    ip_last_octet: 20
+    ram_gb: 8
+    cpus: 4
+    windows:
+      install_additional_tools: false
+    testing:
+      snapshot: true
+      block_internet: false
+    roles:
+      - setup-atomic-red-team
+
+  - vm_name: "art-win2022-server"
+    hostname: "art-win2022-server"
+    template: win2022-server-x64-template
+    vlan: 20
+    ip_last_octet: 22
+    ram_gb: 8
+    cpus: 4
+    testing:
+      snapshot: true
+      block_internet: false
+    windows:
+      install_additional_tools: false
+    roles:
+      - setup-atomic-red-team
+
+  - vm_name: "art-rocky"
+    hostname: "art-rocky"
+    template: rocky-9-x64-server-template
+    vlan: 20
+    ip_last_octet: 23
+    ram_gb: 4
+    cpus: 2
+    linux: true
+    testing:
+      snapshot: true
+      block_internet: false
+    roles:
+      - setup-atomic-red-team
+
+router:
+  vm_name: "art-router"
+  hostname: "art-router"
+  template: debian-12-x64-server-template

@@ -1,0 +1,9 @@
+---
+ansible_atomic_red_team_disable_fetch_art_index: false
+
+ansible_atomic_red_team_repository_owner: redcanaryco
+ansible_atomic_red_team_branch: master
+
+# PowerShell version to install (if needed)
+ansible_atomic_red_team_pwsh_version: "7.5.0"
+ansible_atomic_red_team_nix_pwsh_path: "/opt/microsoft/powershell/7"
