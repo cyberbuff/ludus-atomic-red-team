@@ -15,6 +15,7 @@ This repository helps you set up an automated [Atomic Red Team](https://github.c
     - [3. Clone this repository](#3-clone-this-repository)
     - [4. Install required Ansible collections and roles](#4-install-required-ansible-collections-and-roles)
     - [5. Deploy your range](#5-deploy-your-range)
+    - [6. Start testing](#6-start-testing)
   - [🤝 Contributing](#-contributing)
   - [📚 Additional Resources](#-additional-resources)
 
@@ -103,6 +104,20 @@ ludus range deploy
 # Monitor deployment
 ludus range logs -f
 ```
+
+### 6. Start testing
+
+When you run this command, ludus will capture a snapshot of the machines in your range (depending on whether testing.snapshot is set to `true`).
+```bash
+ludus testing start
+```
+
+When you have finished running the tests, stop the testing to revert back to the snapshot state.
+
+```bash
+ludus testing stop
+```
+
 
 ## 🤝 Contributing
 
