@@ -17,8 +17,7 @@ ludus:
       docker_edition: ce
       docker_install_compose: true
       docker_compose_version: "v2.33.1"
-      docker_compose_arch: "{{ ansible_architecture }}"
-      docker_compose_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-linux-{{ docker_compose_arch }}"
+      docker_compose_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-linux-x86_64"
 
   - vm_name: "art-debian"
     hostname: "art-debian"
