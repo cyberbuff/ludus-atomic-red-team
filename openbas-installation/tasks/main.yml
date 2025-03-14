@@ -1,0 +1,4 @@
+---
+- name: Setup Linux
+  ansible.builtin.include_tasks: "setup-linux.yml"
+  when: ansible_system == 'Linux'

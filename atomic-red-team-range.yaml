@@ -1,4 +1,21 @@
 ludus:
+  - vm_name: "art-bas"
+    hostname: "art-bas"
+    template: debian-12-x64-server-template
+    vlan: 20
+    ip_last_octet: 5
+    ram_gb: 8
+    cpus: 4
+    linux: true
+    testing:
+      snapshot: true
+      block_internet: false
+    roles:
+      - geerlingguy.docker
+      - openbas-installation
+    role_vars:
+      docker_edition: ce
+
   - vm_name: "art-debian"
     hostname: "art-debian"
     template: debian-12-x64-server-template

@@ -1,0 +1,16 @@
+---
+- name: Run Atomic Tests
+  hosts: "{{ target_hosts }}"
+  become: true
+  vars_prompt:
+    - name: "target_hosts"
+      prompt: "Enter the target hosts (e.g., 'all' or 'webservers')"
+      default: "all"
+    - name: "ansible_atomic_test"
+      prompt: "Enter the Atomic Test ID"
+      default: "{{ ansible_atomic_test }}"
+    - name: "ansible_atomic_test_timeout"
+      prompt: "Enter the Atomic Test Timeout (seconds)"
+      default: "{{ ansible_atomic_test_timeout }}"
+  tasks:
+    - include_tasks: "tasks/main.yml"

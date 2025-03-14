@@ -1,0 +1,8 @@
+---
+- name: Setup Windows
+  ansible.builtin.include_tasks: "setup-windows.yml"
+  when: ansible_system == 'Win32NT'
+
+- name: Setup Linux
+  ansible.builtin.include_tasks: "setup-linux.yml"
+  when: ansible_system == 'Linux'

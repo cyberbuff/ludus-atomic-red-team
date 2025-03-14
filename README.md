@@ -81,9 +81,11 @@ cd ludus-atomic-red-team
 ```bash
 # Install role prerequisites
 ludus ansible collection add git+https://github.com/CowDogMoo/ansible-collection-workstation.git,main
+ludus ansible role add geerlingguy.docker
 
 # Install Atomic Red Team and its prerequisites
 ludus ansible role add -d ./setup-atomic-red-team
+ludus ansible role add -d ./openbas-installation
 ```
 
 ### 5. Deploy your range

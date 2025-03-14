@@ -1,0 +1,42 @@
+- name: Run Windows Tests
+  block:
+    - name: "Check for and install prereqs for {{ ansible_atomic_test }}"
+      block:
+        - name: "Check prereqs for {{ ansible_atomic_test }}"
+          ansible.windows.win_shell: |
+            Invoke-AtomicTest {{ ansible_atomic_test }} -CheckPrereqs
+          register: check_prereqs
+          failed_when: '"Prerequisites not met:" in check_prereqs.stdout'
+          changed_when: false
+      rescue:
+        - name: "Install prereqs for {{ ansible_atomic_test }}"
+          ansible.windows.win_shell: |
+            Invoke-AtomicTest {{ ansible_atomic_test }} -GetPrereqs
+          register: get_prereqs
+          ignore_errors: true
+
+        - name: "Debug prereqs {{ ansible_atomic_test }}"
+          ansible.builtin.debug:
+            var: get_prereqs.stdout
+          when: get_prereqs.changed
+
+    - name: "Execute {{ ansible_atomic_test }}"
+      ansible.windows.win_shell: |
+        Invoke-AtomicTest {{ ansible_atomic_test }} -Confirm:$false -TimeoutSeconds 300 -ExecutionLogPath /root/atc_execution.csv
+      register: execute_test
+      ignore_errors: true
+
+    - name: "Execute {{ ansible_atomic_test }}"
+      ansible.builtin.debug:
+        var: execute_test.stdout
+
+    - name: "Cleanup {{ ansible_atomic_test }}"
+      ansible.windows.win_shell: |
+        Invoke-AtomicTest {{ ansible_atomic_test }} -Cleanup
+      register: cleanup_test
+      ignore_errors: true
+
+    - name: "Cleanup {{ ansible_atomic_test }}"
+      ansible.builtin.debug:
+        var: cleanup_test.stdout
+      when: cleanup_test.rc != 0

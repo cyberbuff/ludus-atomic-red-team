@@ -1,0 +1,9 @@
+galaxy_info:
+  author: cyberbuff
+  description: An ansible role to run Atomic Red Team tests
+  role_name: run_atomics
+  namespace: cyberbuff
+
+  license: MIT
+
+  min_ansible_version: "2.14"

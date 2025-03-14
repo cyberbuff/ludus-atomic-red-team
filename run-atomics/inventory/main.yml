@@ -1,0 +1,30 @@
+ubuntu:
+  hosts:
+    "art-debian":
+      ansible_connection: ssh
+      ansible_user: debian
+      ansible_password: "debian"
+
+rocky:
+  hosts:
+    "art-rocky":
+      ansible_connection: ssh
+      ansible_user: root
+      ansible_password: root
+
+linux:
+  hosts:
+    "art-debian":
+    "art-rocky":
+
+windows:
+  hosts:
+    "art-win11":
+    "art-win2022-server":
+  vars:
+    ansible_connection: winrm
+    ansible_user: localuser
+    ansible_password: "localuser"
+    ansible_port: 5985
+    ansible_scheme: http
+    ansible_winrm_server_cert_validation: ignore

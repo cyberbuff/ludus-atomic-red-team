@@ -1,0 +1,26 @@
+---
+ansible_openbas_installation_nix_path: "/opt/openbas"
+ansible_postgres_user: postgres
+ansible_postgres_password: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_keystore_password: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_minio_root_user: minio
+ansible_minio_root_password: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_rabbitmq_default_user: rabbit
+ansible_rabbitmq_default_pass: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_spring_mail_host: http://smtp.example.com
+ansible_spring_mail_port: 465
+ansible_spring_mail_username: mailto:cyberbuff@example.com
+ansible_spring_mail_password: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_spring_mail_properties_mail_smtp_auth: true
+ansible_spring_mail_properties_mail_smtp_ssl_enable: true
+ansible_spring_mail_properties_mail_smtp_starttls_enable: false
+ansible_openbas_mail_imap_host: http://imap.example.com
+ansible_openbas_mail_imap_port: 993
+ansible_openbas_mail_imap_auth: true
+ansible_openbas_mail_imap_ssl_enable: true
+ansible_openbas_mail_imap_starttls_enable: false
+ansible_openbas_admin_email: mailto:cyberbuff@example.com
+ansible_openbas_admin_password: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_openbas_admin_token: a6360a85-4904-4ac1-98d7-c55dcc2162f6
+ansible_collector_mitre_attack_id: 3050d2a3-291d-44eb-8038-b4e7dd107436
+ansible_collector_atomic_red_team_id: 0f2a85c1-0a3b-4405-a79c-c65398ee4a76

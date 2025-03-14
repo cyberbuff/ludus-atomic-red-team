@@ -1,0 +1,54 @@
+- name: Install OpenBAS on Linux
+  block:
+    - name: Start Docker service
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    - name: Update package list
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install task-kde-desktop
+      ansible.builtin.apt:
+        name: task-kde-desktop
+        state: present
+
+    - name: Clone OpenBAS Docker repository
+      ansible.builtin.git:
+        repo: "https://github.com/OpenBAS-Platform/docker.git"
+        dest: "{{ ansible_openbas_installation_nix_path }}"
+
+    - name: Copy environment file
+      ansible.builtin.copy:
+        dest: "{{ ansible_openbas_installation_nix_path }}/.env"
+        content: |
+          POSTGRES_USER={{ ansible_postgres_user }}
+          POSTGRES_PASSWORD={{ ansible_postgres_password }}
+          KEYSTORE_PASSWORD={{ ansible_keystore_password }}
+          MINIO_ROOT_USER={{ ansible_minio_root_user }}
+          MINIO_ROOT_PASSWORD={{ ansible_minio_root_password }}
+          RABBITMQ_DEFAULT_USER={{ ansible_rabbitmq_default_user }}
+          RABBITMQ_DEFAULT_PASS={{ ansible_rabbitmq_default_pass }}
+          SPRING_MAIL_HOST={{ ansible_spring_mail_host }}
+          SPRING_MAIL_PORT={{ ansible_spring_mail_port }}
+          SPRING_MAIL_USERNAME={{ ansible_spring_mail_username }}
+          SPRING_MAIL_PASSWORD={{ ansible_spring_mail_password }}
+          SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH={{ ansible_spring_mail_properties_mail_smtp_auth }}
+          SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE={{ ansible_spring_mail_properties_mail_smtp_ssl_enable }}
+          SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE={{ ansible_spring_mail_properties_mail_smtp_starttls_enable }}
+          OPENBAS_MAIL_IMAP_HOST={{ ansible_openbas_mail_imap_host }}
+          OPENBAS_MAIL_IMAP_PORT={{ ansible_openbas_mail_imap_port }}
+          OPENBAS_MAIL_IMAP_AUTH={{ ansible_openbas_mail_imap_auth }}
+          OPENBAS_MAIL_IMAP_SSL_ENABLE={{ ansible_openbas_mail_imap_ssl_enable }}
+          OPENBAS_MAIL_IMAP_STARTTLS_ENABLE={{ ansible_openbas_mail_imap_starttls_enable }}
+          OPENBAS_ADMIN_EMAIL={{ ansible_openbas_admin_email }}
+          OPENBAS_ADMIN_PASSWORD={{ ansible_openbas_admin_password }}
+          OPENBAS_ADMIN_TOKEN={{ ansible_openbas_admin_token }}
+          COLLECTOR_MITRE_ATTACK_ID={{ ansible_collector_mitre_attack_id }}
+          COLLECTOR_ATOMIC_RED_TEAM_ID={{ ansible_collector_atomic_red_team_id }}
+
+    - name: Run Docker Compose
+      ansible.builtin.command: docker-compose up -d
+      args:
+        chdir: "{{ ansible_openbas_installation_nix_path }}"

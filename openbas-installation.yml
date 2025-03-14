@@ -1,0 +1,46 @@
+---
+- name: Install OpenBAS on Linux
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Clone OpenBAS Docker repository
+      git:
+        repo: 'https://github.com/OpenBAS-Platform/docker.git'
+        dest: /opt/openbas-docker
+
+    - name: Copy environment file
+      copy:
+        dest: /opt/openbas-docker/.env
+        content: |
+          POSTGRES_USER=ChangeMe
+          POSTGRES_PASSWORD=ChangeMe
+          KEYSTORE_PASSWORD=ChangeMe
+          MINIO_ROOT_USER=ChangeMeAccess
+          MINIO_ROOT_PASSWORD=ChangeMeKey
+          RABBITMQ_DEFAULT_USER=ChangeMe
+          RABBITMQ_DEFAULT_PASS=ChangeMe
+          SPRING_MAIL_HOST=smtp.example.com
+          SPRING_MAIL_PORT=465
+          SPRING_MAIL_USERNAME=ChangeMe@example.com
+          SPRING_MAIL_PASSWORD=ChangeMe
+          OPENBAS_MAIL_IMAP_ENABLED=true
+          OPENBAS_MAIL_IMAP_HOST=imap.example.com
+          OPENBAS_MAIL_IMAP_PORT=993
+          OPENBAS_ADMIN_EMAIL=ChangeMe@example.com
+          OPENBAS_ADMIN_PASSWORD=ChangeMe
+          OPENBAS_ADMIN_TOKEN=ChangeMe
+
+    - name: Run Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: /opt/openbas-docker 

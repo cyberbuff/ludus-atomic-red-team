@@ -1,0 +1,16 @@
+galaxy_info:
+  author: cyberbuff
+  description: An ansible role to install OpenBAS
+  role_name: openbas_installation
+  namespace: cyberbuff
+
+  license: MIT
+
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+
