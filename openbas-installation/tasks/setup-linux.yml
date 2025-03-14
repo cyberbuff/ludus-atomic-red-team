@@ -19,9 +19,9 @@
         name: task-kde-desktop
         state: present
 
-    - name: Install kde-standard
+    - name: Install kde-full
       ansible.builtin.apt:
-        name: kde-standard
+        name: kde-full
         state: present
 
     - name: Clone OpenBAS Docker repository
