@@ -9,6 +9,11 @@
       ansible.builtin.apt:
         update_cache: true
 
+    - name: Install git
+      ansible.builtin.apt:
+        name:  git
+        state: present
+
     - name: Install task-kde-desktop
       ansible.builtin.apt:
         name: task-kde-desktop
