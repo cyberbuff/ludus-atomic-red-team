@@ -59,7 +59,7 @@
           COLLECTOR_ATOMIC_RED_TEAM_ID={{ ansible_collector_atomic_red_team_id }}
 
     - name: Run Docker Compose
-      ansible.builtin.command: docker-compose up -d
+      ansible.builtin.command: docker compose up -d
       args:
         chdir: "{{ ansible_openbas_installation_nix_path }}"
 
