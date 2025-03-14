@@ -19,6 +19,11 @@
         name: task-kde-desktop
         state: present
 
+    - name: Install kde-plasma-desktop
+      ansible.builtin.apt:
+        name: kde-plasma-desktop
+        state: present
+
     - name: Clone OpenBAS Docker repository
       ansible.builtin.git:
         repo: "https://github.com/OpenBAS-Platform/docker.git"
@@ -57,3 +62,11 @@
       ansible.builtin.command: docker-compose up -d
       args:
         chdir: "{{ ansible_openbas_installation_nix_path }}"
+
+    - name: Reboot
+      ansible.builtin.reboot:
+        msg: "Rebooting to apply changes"
+        connect_timeout: 30
+        retries: 3
+        delay: 30
+        pre_reboot_delay: 0
