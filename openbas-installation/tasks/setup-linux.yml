@@ -67,6 +67,4 @@
       ansible.builtin.reboot:
         msg: "Rebooting to apply changes"
         connect_timeout: 30
-        retries: 3
-        delay: 30
         pre_reboot_delay: 0
